@@ -178,6 +178,11 @@ function validatedQueryParams(requestUrl: URL) {
   } catch (err) {
     throw `Invalid input query parameter: ${err}`;
   }
+  description = description
+  .split("\n")
+  .map(line => line.trim())
+  .filter(line => line.length > 0)
+  .join("\n");
 
   return {
     toPubkey,
