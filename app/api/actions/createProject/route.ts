@@ -85,7 +85,7 @@ export const OPTIONS = GET;
 export const POST = async (req: Request) => {
   try {
     const requestUrl = new URL(req.url);
-    const { toPubkey, amount, imageUrl } = validatedQueryParams(requestUrl);
+    const { toPubkey, imageUrl } = validatedQueryParams(requestUrl);
 
     const body: ActionPostRequest = await req.json();
 
@@ -134,7 +134,7 @@ export const POST = async (req: Request) => {
     const payload: ActionPostResponse = await createPostResponse({
       fields: {
         transaction,
-        message: `Send ${amount} SOL to ${toPubkey.toBase58()}`,
+        message: "superteamearn.in",
       },
       // note: no additional signers are needed
       // signers: [],
@@ -165,10 +165,7 @@ function validatedQueryParams(requestUrl: URL) {
     if (requestUrl.searchParams.get("to")) {
       toPubkey = new PublicKey(requestUrl.searchParams.get("to")!);
     }
-    if (requestUrl.searchParams.get("amount")) {
-      amount = parseFloat(requestUrl.searchParams.get("amount")!);
-      if (isNaN(amount) || amount <= 0) throw "Invalid amount";
-    }
+
     if (requestUrl.searchParams.get("title")) {
       title = requestUrl.searchParams.get("title")!;
     }
@@ -183,7 +180,6 @@ function validatedQueryParams(requestUrl: URL) {
   }
 
   return {
-    amount,
     toPubkey,
     title,
     description,
