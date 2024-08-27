@@ -78,7 +78,7 @@ const App = () => {
         const encodedDescription = encodeURIComponent(descriptionCombined);
         const encodedImageUrl = encodeURIComponent(imageUrl || "");
 
-        const baseUrl = "http://localhost:3000/api/actions/createProject";
+        const baseUrl = "https://nocode-blink-superteamearn.vercel.app/api/actions/createProject";
         const queryString = `?to=${encodedToPubkey}&title=${encodedTitle}&description=${encodedDescription}&imageUrl=${encodedImageUrl}`;
         const fullUrl = `${baseUrl}${queryString}`;
 
